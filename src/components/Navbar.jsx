@@ -1,5 +1,5 @@
 import { async } from '@firebase/util'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
 
@@ -16,9 +16,21 @@ const Navbar = () => {
       console.log(error)
     }
   }
+
+  const [color, setColor] = useState(false);
+    const changeColor = () => {
+        if(window.scrollY >= 40) {
+            setColor(true)
+        } else {
+            setColor(false)
+        } 
+    }
+  
+    window.addEventListener('scroll', changeColor)
+
   
   return (
-    <div className='flex items-center justify-between p-4 z-[100] w-full fixed bg-black/40'>
+    <div className={color ? "flex items-center justify-between p-4 z-[100] w-full fixed bg-black/100" : "flex items-center justify-between p-4 z-[100] w-full fixed bg-black/40 transition-duration:500ms;"}>
       <Link to='/'>
         <h1 className='text-red-600 text-4xl font-bold cursor-pointer' >NETFLIX</h1>
       </Link>
